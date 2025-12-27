@@ -1,4 +1,5 @@
 #include <RGSL/termio.h>
+#include <RGSL/rgsl.h>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -43,17 +44,18 @@ void rgsl_fprintf(FILE *stream, const char* prefix, const char* format, ...) {
     va_end(args);
 }
 
-void rgsl_print_info(const char* message) {
-    rgsl_fprint(stdout, "Info", message);
+void rgsl_print_info(int verbose_level, const char* message) {
+    if (rgsl_global_options.verbose >= verbose_level)
+        rgsl_fprint(stdout, "Info", message);
 }
 
-void rgsl_printf_info(const char* format, ...) {
+void rgsl_printf_info(int verbose_level, const char* format, ...) {
     va_list args;
     va_start(args, format);
     char* buffer = NULL;
     rgsl_format_parser(format, args, &buffer);
     if (buffer != NULL) {
-        rgsl_print_info(buffer);
+        rgsl_print_info(verbose_level, buffer);
         free(buffer);
     }
     va_end(args);

@@ -1,15 +1,15 @@
 /** ********************************************************************************
- * @section Validator_Overview Overview
- * @file validator.h
- * @brief Header file for shader validation functions.
+ * @section Compile_Overview Overview
+ * @file compile.h
+ * @brief Header file for shader compilation functions.
  * @details
  * Typical use cases:
- * - Validating shader code snippets.
+ * - Compiling shader code snippets.
  * *********************************************************************************
- * @section Validator_Header Header
- * <RGSL/validator.h>
+ * @section Compile_Header Header
+ * <RGSL/compile.h>
  ***********************************************************************************
- * @section Validator_Metadata Metadata
+ * @section Compile_Metadata Metadata
  * @author Estorc
  * @version v1.0
  * @copyright Copyright (c) 2025 Estorc MIT License.
@@ -38,27 +38,28 @@
  ***********************************************************************************/
 
 #pragma once
-#include <RGSL/rgsl.h>
 #include <stdbool.h>
+#include <RGSL/rgsl.h>
 
 /**
- * @brief Structure to map shader languages to their validator functions.
+ * @brief Structure to map shader languages to their compiler functions.
  * 
  * This structure holds the name of a shader language and a pointer to the function
- * that validates shaders written in that language.
+ * that compiles shaders written in that language.
  */
-struct language_validator_mapping {
+struct language_compiler_mapping {
     const char* language;
-    bool (*validator_func)(struct shader_data *);
+    bool (*compiler_func)(struct shader_data *, char**);
 };
 
 /**
- * @brief Validates the given shader code.
- * @param shader The shader data to validate.
- * @return true if the shader code is valid, false otherwise.
+ * @brief Compiles the given shader data into the desired output format.
+ * @param shader The shader data to compile.
+ * @param output_file The path to the output file where the compiled shader will be saved.
+ * @return true if compilation was successful, false otherwise.
  * 
- * This function performs a basic validation of the provided shader code.
- * Currently, it checks if the code is non-empty. More comprehensive validation
- * can be added in the future.
+ * This function compiles the provided shader code and writes the compiled output
+ * to the specified output file. The compilation process may vary depending on
+ * the shader language and stage.
  */
-bool rgsl_validate_shader(struct shader_data * shader);
+bool rgsl_compile_shader(struct shader_data * shader, const char* output_file);

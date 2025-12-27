@@ -92,6 +92,7 @@ void rgsl_fprintf(FILE *stream, const char* prefix, const char* format, ...);
 
 /**
  * @brief Prints an informational message to the standard output stream.
+ * @param verbose_level The verbosity level required to print the message.
  * @param message The informational message to print.
  * 
  * This function prints an informational message prefixed with "[RGSL Info]" to stdout.
@@ -101,10 +102,11 @@ void rgsl_fprintf(FILE *stream, const char* prefix, const char* format, ...);
  * rgsl_print_info("Shader compiled successfully.\n");
  * @endcode
  */
-void rgsl_print_info(const char* message);
+void rgsl_print_info(int verbose_level, const char* message);
 
 /**
  * @brief Prints a formatted informational message to the standard output stream.
+ * @param verbose_level The verbosity level required to print the message.
  * @param format The format string (printf-style).
  * @param ... Additional arguments for the format string.
  * 
@@ -115,7 +117,7 @@ void rgsl_print_info(const char* message);
  * rgsl_printf_info("Shader %s compiled successfully in %d ms.\n", shader_name, time_ms);
  * @endcode
  */
-void rgsl_printf_info(const char* format, ...);
+void rgsl_printf_info(int verbose_level, const char* format, ...);
 
 /**
  * @brief Prints an error message to the standard error stream.

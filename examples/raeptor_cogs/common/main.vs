@@ -1,13 +1,13 @@
 layout(location = 0) in vec2 vertexPos;
 layout(location = 1) in vec2 vertexUV;
 
-out vec2 vUV;
-out vec3 vBarycentric; // Normal for UV mapping
-out vec4 vClipPos;
-flat out int Type; // Instance type
-flat out int DataOffset; // Offset into another SSBO or same buffer
-flat out int readMaskID; // Reading mask ID
-flat out int writeMaskID; // Writing mask ID
+layout(location = 0) out vec2 vUV;
+layout(location = 1) out vec3 vBarycentric; // Normal for UV mapping
+layout(location = 2) out vec4 vClipPos;
+layout(location = 3) flat out int Type; // Instance type
+layout(location = 4) flat out int DataOffset; // Offset into another SSBO or same buffer
+layout(location = 5) flat out int readMaskID; // Reading mask ID
+layout(location = 6) flat out int writeMaskID; // Writing mask ID
 
 uniform mat4 uViewMatrix;
 uniform mat4 uProjectionMatrix;

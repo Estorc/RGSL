@@ -47,4 +47,4 @@
  * 
  * This function performs validation specific to RGSL shader code.
  */
-bool rgsl_rgsl_validate_shader(struct shader_data shader);
+bool rgsl_rgsl_validate_shader(struct shader_data * shader);

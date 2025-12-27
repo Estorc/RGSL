@@ -1,14 +1,14 @@
-flat in int Type;
-flat in int DataOffset;
-flat in int writeMaskID;
-flat in int readMaskID;
-in vec2 vUV;
-in vec3 vBarycentric;
-in vec4 vClipPos;
-out vec4 FragColor;
+layout(location = 0) flat in int Type;
+layout(location = 1) flat in int DataOffset;
+layout(location = 2) flat in int writeMaskID;
+layout(location = 3) flat in int readMaskID;
+layout(location = 4) in vec2 vUV;
+layout(location = 5) in vec3 vBarycentric;
+layout(location = 6) in vec4 vClipPos;
+layout(location = 0) out vec4 FragColor;
 
-uniform sampler2D uTextureSampler;
-uniform usampler2D uMaskTextureSampler;
+layout(binding = 0) uniform sampler2D uTextureSampler;
+layout(binding = 1) uniform usampler2D uMaskTextureSampler;
 
 void main() {
     uint maskValue = texture(uMaskTextureSampler, vClipPos.xy / vClipPos.w * 0.5 + 0.5).r;

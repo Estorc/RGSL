@@ -41,24 +41,35 @@
 #include <stdbool.h>
 
 /**
- * @brief Reads the entire content of a file into a dynamically allocated string.
+ * @brief Reads the entire contents of a file into a dynamically allocated buffer.
  * @param filename The path to the file to read.
- * @return A pointer to the dynamically allocated string containing the file content,
- * or NULL if the file could not be opened or read.
+ * @param out_buffer Pointer to a char pointer that will receive the allocated buffer.
+ * @return The size of the read file in bytes, or 0 if an error occurred
+ * or the file could not be read.
  * 
- * This function opens the specified file in binary mode, reads its entire content,
- * and returns it as a null-terminated string. The caller is responsible for freeing
- * the allocated memory.
+ * This function opens the specified file in binary mode, reads its entire contents
+ * into a dynamically allocated buffer, and null-terminates the buffer. The caller
+ * is responsible for freeing the allocated buffer using rgsl_free_file_buffer.
+ */
+size_t rgsl_read_file(const char* filename, char **out_buffer);
+
+/**
+ * @brief Writes the contents of a buffer to a file.
+ * @param filename The path to the file to write.
+ * @param buffer The buffer containing the data to write.
+ * @param size The size of the buffer in bytes.
+ * @return true if the file was written successfully, false otherwise.
+ * 
+ * This function opens the specified file in binary write mode and writes the contents
+ * of the provided buffer to the file. If size is 0, the function writes the entire
+ * buffer until a null terminator is encountered.
  * 
  * @code{c}
- * char *shader_code = read_file("shader.glsl");
- * if (shader_code != NULL) {
- *     // Use shader_code...
- *    free(shader_code);
- * }
+ * const char* data = "Hello, RGSL!";
+ * bool success = rgsl_write_file("output.txt", data, 0);
  * @endcode
  */
-char *rgsl_read_file(const char* filename);
+bool rgsl_write_file(const char* filename, const char* buffer, size_t size);
 
 /**
  * @brief Converts all CRLF line endings in a string to LF line endings.

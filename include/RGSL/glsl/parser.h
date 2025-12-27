@@ -1,15 +1,15 @@
 /** ********************************************************************************
- * @section Validator_Overview Overview
- * @file validator.h
- * @brief Header file for shader validation functions.
+ * @section RGSL_Parser_Overview Overview
+ * @file parser.h
+ * @brief Header file for shader parsing functions.
  * @details
  * Typical use cases:
- * - Validating shader code snippets.
+ * - Parsing RGSL shader code.
  * *********************************************************************************
- * @section Validator_Header Header
- * <RGSL/validator.h>
+ * @section RGSL_Parser_Header Header
+ * <RGSL/rgsl/parser.h>
  ***********************************************************************************
- * @section Validator_Metadata Metadata
+ * @section RGSL_Parser_Metadata Metadata
  * @author Estorc
  * @version v1.0
  * @copyright Copyright (c) 2025 Estorc MIT License.
@@ -38,27 +38,11 @@
  ***********************************************************************************/
 
 #pragma once
-#include <RGSL/rgsl.h>
-#include <stdbool.h>
+#include <RGSL/parser.h>
 
 /**
- * @brief Structure to map shader languages to their validator functions.
+ * @brief External declaration of GLSL directive mappings.
  * 
- * This structure holds the name of a shader language and a pointer to the function
- * that validates shaders written in that language.
+ * This array maps GLSL preprocessor directives to their corresponding handler functions.
  */
-struct language_validator_mapping {
-    const char* language;
-    bool (*validator_func)(struct shader_data *);
-};
-
-/**
- * @brief Validates the given shader code.
- * @param shader The shader data to validate.
- * @return true if the shader code is valid, false otherwise.
- * 
- * This function performs a basic validation of the provided shader code.
- * Currently, it checks if the code is non-empty. More comprehensive validation
- * can be added in the future.
- */
-bool rgsl_validate_shader(struct shader_data * shader);
+extern const struct directive_mapping GLSL_DIRECTIVE_MAPPINGS[];

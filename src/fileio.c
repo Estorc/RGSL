@@ -3,24 +3,43 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *rgsl_read_file(const char* filename) {
+size_t rgsl_read_file(const char* filename, char **out_buffer) {
     FILE *file;
     fopen_s(&file, filename, "rb");
-    if (!file) {
-        return NULL;
+    if (file == NULL) {
+        return 0;
     }
     fseek(file, 0, SEEK_END);
-    long length = ftell(file);
+    size_t file_size = ftell(file);
     fseek(file, 0, SEEK_SET);
-    char *buffer = (char *)malloc(length + 1);
-    if (!buffer) {
+    *out_buffer = (char *)malloc((file_size + 1) * sizeof(char));
+    if (*out_buffer == NULL) {
         fclose(file);
-        return NULL;
+        return 0;
     }
-    fread(buffer, 1, length, file);
-    buffer[length] = '\0';
+    size_t read_size = fread(*out_buffer, sizeof(char), file_size, file);
+    (*out_buffer)[read_size] = '\0'; // Null-terminate the string
     fclose(file);
-    return buffer;
+    return read_size;
+}
+
+bool rgsl_write_file(const char* filename, const char* buffer, size_t size) {
+    bool valid = true;
+    FILE *file;
+    fopen_s(&file, filename, "wb");
+    if (file == NULL) {
+        return false;
+    }
+    if (size) {
+        size_t written_size = fwrite(buffer, sizeof(char), size, file);
+        valid &= (written_size == size);
+    } else {
+        size_t written_size = fwrite(buffer, sizeof(char), strlen(buffer), file);
+        valid &= (written_size == strlen(buffer));
+    }
+    
+    fclose(file);
+    return valid;
 }
 
 char *rgsl_crlf_to_lf(const char* str) {

@@ -1,4 +1,5 @@
-#include <data_common.glsl>
+#version 300 es
+#include <common/data.glsl>
 uniform usampler2D uIndirectionBuffer;
 uniform usampler2D uInstanceBuffer;
 uniform usampler2D uRawDataBuffer;
