@@ -84,4 +84,4 @@ endfunction()
 
 
 # Add the main RGSL executables
-add_rgsl_executable(RGSL src/main.c ${SOURCES})
+add_rgsl_executable(rgsl src/main.c ${SOURCES})
