@@ -39,14 +39,17 @@
 
 #pragma once
 #include <stdbool.h>
+#include <RGSL/rgsl.h>
 
 /**
  * @brief Structure to maintain the state of the parser.
  * 
- * This structure contains pointers to the processed shader code,
- * the current line being processed, and the end of the current line.
+ * This structure holds information about the current state of the shader
+ * parsing process, including the shader being processed, the processed code,
+ * current line pointers, and flags for directive handling.
  */
 struct parser_state {
+    struct shader_data* shader;
     char* processed_code;
     char* current_line;
     char* line_end;
@@ -119,4 +122,4 @@ bool rgsl_process_directive(const struct directive_mapping DIRECTIVE_MAPPINGS[],
  * 
  * @note The returned string is dynamically allocated and should be freed by the caller.
  */
-char * rgsl_parse_shader(const struct directive_mapping DIRECTIVE_MAPPINGS[], const char* shader_code);
+char * rgsl_parse_shader(const struct directive_mapping DIRECTIVE_MAPPINGS[], struct shader_data* shader);

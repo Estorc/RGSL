@@ -40,11 +40,21 @@
 #pragma once
 #include <stdbool.h>
 
+/**
+ * @brief Structure to hold shader profile information.
+ * 
+ * This structure contains the version and profile name of a shader.
+ */
+struct shader_profile {
+    int version;
+    const char* name;
+};
 
 /**
  * @brief Structure to hold shader data.
  * 
- * This structure contains the shader code and its associated stage (e.g., vert, frag).
+ * This structure contains information about a shader, including its name,
+ * source code, word count, language, stage, and profile.
  */
 struct shader_data {
     const char* name;
@@ -52,6 +62,7 @@ struct shader_data {
     size_t word_count;
     const char* language;
     const char* stage;
+    struct shader_profile profile;
 };
 
 /**

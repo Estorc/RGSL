@@ -14,7 +14,7 @@
 bool rgsl_glsl_validate_shader(struct shader_data * shader) {
     bool valid = true;
     rgsl_print_info(1, "Preprocessing GLSL shader code...\n");
-    char* processed_code = rgsl_parse_shader(GLSL_DIRECTIVE_MAPPINGS, shader->code);
+    char* processed_code = rgsl_parse_shader(GLSL_DIRECTIVE_MAPPINGS, shader);
     if (processed_code == NULL) {
         rgsl_print_error("Failed to preprocess GLSL shader code.\n");
         return false;

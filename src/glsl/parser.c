@@ -43,6 +43,15 @@ int rgsl_glsl_handle_version_directive(struct parser_state* state, const char* v
     // Placeholder for handling #version directive
     rgsl_printf_info(2, "Handling #version directive with value: %s\n", value);
     if (!state->version_directive_found) {
+        state->shader->profile.version = atoi(value);
+        const char* profile_start = strchr(value, ' ');
+        if (profile_start != NULL) {
+            char * profile_name = _strdup(profile_start + 1);
+            profile_name[strcspn(profile_name, "\n")] = '\0'; // Remove newline
+            state->shader->profile.name = profile_name;
+        } else {
+            state->shader->profile.name = "core"; // Default profile
+        }
         state->version_directive_found = true;
     } else {
         char **replaced_line = (char **)out;

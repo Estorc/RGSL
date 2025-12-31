@@ -4,7 +4,7 @@
 
 bool rgsl_glsl_compile_shader(struct shader_data * shader, char** output) {
     rgsl_print_info(1, "Preprocessing GLSL shader code...\n");
-    *output = rgsl_parse_shader(GLSL_DIRECTIVE_MAPPINGS, shader->code);
+    *output = rgsl_parse_shader(GLSL_DIRECTIVE_MAPPINGS, shader);
     if (*output == NULL) {
         rgsl_print_error("Failed to preprocess GLSL shader code.\n");
         return false;

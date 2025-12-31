@@ -76,9 +76,10 @@ bool rgsl_process_directive(const struct directive_mapping DIRECTIVE_MAPPINGS[],
     return true;
 }
 
-char * rgsl_parse_shader(const struct directive_mapping DIRECTIVE_MAPPINGS[], const char* shader_code) {
+char * rgsl_parse_shader(const struct directive_mapping DIRECTIVE_MAPPINGS[], struct shader_data* shader) {
     struct parser_state state;
-    state.processed_code = _strdup(shader_code);
+    state.shader = shader;
+    state.processed_code = _strdup(shader->code);
     state.current_line = state.processed_code;
     state.version_directive_found = false;
     while (*state.current_line != '\0') {

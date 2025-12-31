@@ -82,6 +82,8 @@ bool rgsl_package_shaders(struct shader_data* shaders) {
         "struct rgsl_shader_blob {\n"
         "    const char *name;\n"
         "    enum rgsl_stage stage;\n"
+        "    int version;\n"
+        "    const char *profile;\n"
     );
     if (rgsl_global_options.action & RGSL_ACTION_COMPILE_SPIRV) {
         fprintf(output_file,
@@ -115,6 +117,8 @@ bool rgsl_package_shaders(struct shader_data* shaders) {
 
         fprintf(output_file, "\t\t\"shader_%s\",\n", shader.name);
         fprintf(output_file, "\t\t%s,\n", rgsl_get_stage_enum(shader.stage));
+        fprintf(output_file, "\t\t%d,\n", shader.profile.version);
+        fprintf(output_file, "\t\t\"%s\",\n", shader.profile.name);
 
         if (rgsl_global_options.action & RGSL_ACTION_COMPILE_SPIRV) {
             fprintf(output_file, "\t\t__rgsl__spirv_words_%zu,\n", i);
