@@ -30,6 +30,47 @@ It also let developers use GLSL directly when needed.
 - [ ] Community feedback and iteration
 - [ ] Support for additional shading languages (e.g., HLSL, Metal)
 
+## How to Use RGSL
+
+### Basic Usage
+
+```bash
+rgsl [options] <input file>...
+```
+
+### Command-line Options
+
+**File Options:**
+
+- `-o, --output <file>` - Specify the output file
+
+**Action Options** (choose at least one):
+
+- `-V, --validate` - Validate the input shader file
+- `-C, --compile` - Compile the input shader file
+- `-S, --spirv` - Compile the input shader to SPIR-V
+- `--embed` - Merge input shaders into an embeddable C array
+
+**Miscellaneous Options:**
+
+- `-I, --include <path>` - Add additional include paths
+- `-v, --version` - Show version information and exit
+- `--verbose <level>` - Set verbosity level (0=quiet, 1=normal, 2=verbose)
+- `-h, --help` - Show help message
+
+### Examples
+
+```bash
+# Validate a shader file
+rgsl --validate shader.rgsl
+
+# Compile to GLSL
+rgsl --compile shader.rgsl -o shader.glsl
+
+# Compile to SPIR-V
+rgsl --spirv shader.rgsl -o shader.spv
+```
+
 ## Building
 
 ### Requirements
