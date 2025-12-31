@@ -82,6 +82,33 @@ function(add_rgsl_executable target_name)
     endif()
 endfunction()
 
+function(disable_warnings TARGET_NAME)
+    if (TARGET ${TARGET_NAME})
+        if (MSVC)
+            target_compile_options(${TARGET_NAME} PRIVATE
+                /W0
+                /clang:-Wno-everything
+            )
+        elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+            target_compile_options(${TARGET_NAME} PRIVATE
+                -Wno-everything
+            )
+        elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+            target_compile_options(${TARGET_NAME} PRIVATE
+                -w
+            )
+        elseif(MSVC)
+            target_compile_options(${TARGET_NAME} PRIVATE
+                /W0
+            )
+        endif()
+    endif()
+endfunction()
+
 
 # Add the main RGSL executables
 add_rgsl_executable(rgsl src/main.c ${SOURCES})
+
+disable_warnings(spirv-headers)
+disable_warnings(spirv-tools)
+disable_warnings(glslang)
