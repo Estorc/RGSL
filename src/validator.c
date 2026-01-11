@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-const struct language_validator_mapping LANGUAGE_VALIDATORS[] = {
+const struct rgsl_language_validator_mapping LANGUAGE_VALIDATORS[] = {
     {"glsl", &rgsl_glsl_validate_shader},
     {"rgsl", &rgsl_rgsl_validate_shader}
 };
@@ -20,7 +20,7 @@ bool rgsl_check_non_empty(const char* code) {
     return result;
 }
 
-bool (* const rgsl_select_language_validator(const char* language))(struct shader_data *) {
+bool (* const rgsl_select_language_validator(const char* language))(struct rgsl_shader_data *) {
     size_t num_languages = sizeof(LANGUAGE_VALIDATORS) / sizeof(LANGUAGE_VALIDATORS[0]);
     for (size_t i = 0; i < num_languages; i++) {
         if (strcmp(language, LANGUAGE_VALIDATORS[i].language) == 0) {
@@ -30,11 +30,11 @@ bool (* const rgsl_select_language_validator(const char* language))(struct shade
     return NULL;
 }
 
-bool rgsl_validate_shader(struct shader_data * shader) {
+bool rgsl_validate_shader(struct rgsl_shader_data * shader) {
     bool is_valid = true;
     is_valid &= rgsl_check_non_empty(shader->code);
     rgsl_printf_info(1, "Shader language detected: %s\n", shader->language);
-    bool (*validator_func)(struct shader_data *) = rgsl_select_language_validator(shader->language);
+    bool (*validator_func)(struct rgsl_shader_data *) = rgsl_select_language_validator(shader->language);
     if (validator_func != NULL) {
         is_valid &= validator_func(shader);
     } else {

@@ -6,7 +6,7 @@
 
 struct rgsl_options rgsl_global_options = {};
 
-static const struct language_mapping LANGUAGE_MAPPINGS[] = {
+static const struct rgsl_language_mapping LANGUAGE_MAPPINGS[] = {
     /** 
      * GLSL 
      */
@@ -54,7 +54,7 @@ static const struct language_mapping LANGUAGE_MAPPINGS[] = {
     {".rte", "rgsl"}
 };
 
-static const struct stage_mapping STAGE_MAPPINGS[] = {
+static const struct rgsl_stage_mapping STAGE_MAPPINGS[] = {
     /** vertex shaders */
     {".vert", "vert"},
     {".vs", "vert"},

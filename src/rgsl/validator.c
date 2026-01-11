@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-bool rgsl_rgsl_validate_shader(struct shader_data * shader) {
+bool rgsl_rgsl_validate_shader(struct rgsl_shader_data * shader) {
     rgsl_print_error("RGSL validation not yet implemented.\n");
     return true;
 }

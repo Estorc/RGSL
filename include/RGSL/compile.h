@@ -47,9 +47,9 @@
  * This structure holds the name of a shader language and a pointer to the function
  * that compiles shaders written in that language.
  */
-struct language_compiler_mapping {
+struct rgsl_language_compiler_mapping {
     const char* language;
-    bool (*compiler_func)(struct shader_data *, char**);
+    bool (*compiler_func)(struct rgsl_shader_data *, char**);
 };
 
 /**
@@ -62,4 +62,4 @@ struct language_compiler_mapping {
  * to the specified output file. The compilation process may vary depending on
  * the shader language and stage.
  */
-bool rgsl_compile_shader(struct shader_data * shader, const char* output_file);
+bool rgsl_compile_shader(struct rgsl_shader_data * shader, const char* output_file);

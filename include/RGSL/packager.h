@@ -51,4 +51,4 @@
  * global RGSL options. The output file contains an array of shader blobs that can be
  * included in C/C++ projects.
  */
-bool rgsl_package_shaders(struct shader_data* shaders);
+bool rgsl_package_shaders(struct rgsl_shader_data* shaders);

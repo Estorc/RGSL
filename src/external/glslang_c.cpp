@@ -130,15 +130,15 @@ static EShLanguage StageFromString(const char* s) {
     return EShLangCount;
 }
 
-void glslang_initialize() {
+void rgsl_glslang_initialize() {
     glslang::InitializeProcess();
 }
 
-void glslang_finalize() {
+void rgsl_glslang_finalize() {
     glslang::FinalizeProcess();
 }
 
-bool glslang_validate_glsl(const char* source, const char* stage_str, char** out_log) {
+bool rgsl_glslang_validate_glsl(const char* source, const char* stage_str, char** out_log) {
     EShLanguage stage = StageFromString(stage_str);
     if (stage == EShLangCount) {
         *out_log = strdup("Invalid shader stage specified.");
@@ -166,8 +166,8 @@ bool glslang_validate_glsl(const char* source, const char* stage_str, char** out
     return true;
 }
 
-struct glslang_result glslang_compile_glsl(const char* source, const char* stage_str) {
-    struct glslang_result result = {};
+struct rgsl_glslang_result rgsl_glslang_compile_glsl(const char* source, const char* stage_str) {
+    struct rgsl_glslang_result result = {};
     EShLanguage stage = StageFromString(stage_str);
     if (stage == EShLangCount) {
         result.log = strdup("Invalid shader stage specified.");
@@ -215,7 +215,7 @@ struct glslang_result glslang_compile_glsl(const char* source, const char* stage
     return result;
 }
 
-void glslang_free_result(struct glslang_result* r) {
+void rgsl_glslang_free_result(struct rgsl_glslang_result* r) {
     free((void*)r->words);
     free((void*)r->log);
 }

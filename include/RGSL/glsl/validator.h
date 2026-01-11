@@ -47,4 +47,4 @@
  * 
  * This function performs validation specific to GLSL shader code.
  */
-bool rgsl_glsl_validate_shader(struct shader_data * shader);
+bool rgsl_glsl_validate_shader(struct rgsl_shader_data * shader);

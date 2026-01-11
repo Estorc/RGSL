@@ -48,8 +48,8 @@
  * parsing process, including the shader being processed, the processed code,
  * current line pointers, and flags for directive handling.
  */
-struct parser_state {
-    struct shader_data* shader;
+struct rgsl_parser_state {
+    struct rgsl_shader_data* shader;
     char* processed_code;
     char* current_line;
     char* line_end;
@@ -62,9 +62,9 @@ struct parser_state {
  * This structure holds the name of a preprocessor directive and a pointer to the function
  * that handles that directive.
  */
-struct directive_mapping {
+struct rgsl_directive_mapping {
     const char* directive;
-    int (*handler_func)(struct parser_state*, const char* value, void* out);
+    int (*handler_func)(struct rgsl_parser_state*, const char* value, void* out);
 };
 
 /**
@@ -72,7 +72,7 @@ struct directive_mapping {
  * 
  * This structure contains the name of the directive and its associated value.
  */
-struct directive {
+struct rgsl_directive {
     char* name;
     char* value;
 };
@@ -88,7 +88,7 @@ struct directive {
  * and stores them in the provided output parameters.
  */
 bool rgsl_read_preprocessor_directives(/* in */ const char* line,
-                                      /* out */ struct directive* directive);
+                                      /* out */ struct rgsl_directive* directive);
 
 /**
  * @brief Frees the memory allocated for a directive's name and value.
@@ -96,7 +96,7 @@ bool rgsl_read_preprocessor_directives(/* in */ const char* line,
  * 
  * This function releases the memory allocated for the name and value of the given directive.
  */
-void rgsl_free_directive(struct directive* directive);
+void rgsl_free_directive(struct rgsl_directive* directive);
 
 /**
  * @brief Processes a preprocessor directive found in the shader code.
@@ -108,7 +108,7 @@ void rgsl_free_directive(struct directive* directive);
  * and invokes the corresponding handler function. It modifies the processed code
  * and line pointers as necessary based on the directive's effect.
  */
-bool rgsl_process_directive(const struct directive_mapping DIRECTIVE_MAPPINGS[], const struct directive directive, struct parser_state* state);
+bool rgsl_process_directive(const struct rgsl_directive_mapping DIRECTIVE_MAPPINGS[], const struct rgsl_directive directive, struct rgsl_parser_state* state);
 
 /**
  * @brief Parses the shader code, handling preprocessor directives.
@@ -122,4 +122,4 @@ bool rgsl_process_directive(const struct directive_mapping DIRECTIVE_MAPPINGS[],
  * 
  * @note The returned string is dynamically allocated and should be freed by the caller.
  */
-char * rgsl_parse_shader(const struct directive_mapping DIRECTIVE_MAPPINGS[], struct shader_data* shader);
+char * rgsl_parse_shader(const struct rgsl_directive_mapping DIRECTIVE_MAPPINGS[], struct rgsl_shader_data* shader);

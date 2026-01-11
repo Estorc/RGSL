@@ -45,7 +45,7 @@
  * 
  * This structure contains the version and profile name of a shader.
  */
-struct shader_profile {
+struct rgsl_shader_profile {
     int version;
     const char* name;
 };
@@ -56,13 +56,13 @@ struct shader_profile {
  * This structure contains information about a shader, including its name,
  * source code, word count, language, stage, and profile.
  */
-struct shader_data {
+struct rgsl_shader_data {
     const char* name;
     char* code;
     size_t word_count;
     const char* language;
     const char* stage;
-    struct shader_profile profile;
+    struct rgsl_shader_profile profile;
 };
 
 /**
@@ -70,7 +70,7 @@ struct shader_data {
  * 
  * This structure holds a file extension and its corresponding shader language.
  */
-struct language_mapping {
+struct rgsl_language_mapping {
     const char* extension;
     const char* language;
 };
@@ -80,7 +80,7 @@ struct language_mapping {
  * 
  * This structure holds a file extension and its corresponding shader stage.
  */
-struct stage_mapping {
+struct rgsl_stage_mapping {
     const char* extension;
     const char* stage;
 };

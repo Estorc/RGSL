@@ -48,4 +48,4 @@
  * 
  * This function compiles the provided shader code and writes the compiled output.
  */
-bool rgsl_rgsl_compile_shader(struct shader_data * shader, char** output);
+bool rgsl_rgsl_compile_shader(struct rgsl_shader_data * shader, char** output);

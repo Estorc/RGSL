@@ -47,9 +47,9 @@
  * This structure holds the name of a shader language and a pointer to the function
  * that validates shaders written in that language.
  */
-struct language_validator_mapping {
+struct rgsl_language_validator_mapping {
     const char* language;
-    bool (*validator_func)(struct shader_data *);
+    bool (*validator_func)(struct rgsl_shader_data *);
 };
 
 /**
@@ -61,4 +61,4 @@ struct language_validator_mapping {
  * Currently, it checks if the code is non-empty. More comprehensive validation
  * can be added in the future.
  */
-bool rgsl_validate_shader(struct shader_data * shader);
+bool rgsl_validate_shader(struct rgsl_shader_data * shader);

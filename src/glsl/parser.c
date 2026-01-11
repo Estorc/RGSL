@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int rgsl_glsl_handle_include_directive(struct parser_state* state, const char* value, void* out) {
+int rgsl_glsl_handle_include_directive(struct rgsl_parser_state* state, const char* value, void* out) {
     // Placeholder for handling #include directive
     rgsl_printf_info(2, "Handling #include directive with value: %s\n", value);
     if (out != NULL) {
@@ -39,7 +39,7 @@ int rgsl_glsl_handle_include_directive(struct parser_state* state, const char* v
     return 0; // Success
 }
 
-int rgsl_glsl_handle_version_directive(struct parser_state* state, const char* value, void* out) {
+int rgsl_glsl_handle_version_directive(struct rgsl_parser_state* state, const char* value, void* out) {
     // Placeholder for handling #version directive
     rgsl_printf_info(2, "Handling #version directive with value: %s\n", value);
     if (!state->version_directive_found) {
@@ -61,7 +61,7 @@ int rgsl_glsl_handle_version_directive(struct parser_state* state, const char* v
     return 0; // Success
 }
 
-const struct directive_mapping GLSL_DIRECTIVE_MAPPINGS[] = {
+const struct rgsl_directive_mapping GLSL_DIRECTIVE_MAPPINGS[] = {
     {"include", rgsl_glsl_handle_include_directive},
     {"version", rgsl_glsl_handle_version_directive},
     {NULL, NULL} // Sentinel to mark the end of the array

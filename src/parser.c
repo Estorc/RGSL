@@ -4,7 +4,7 @@
 #include <string.h>
 
 bool rgsl_read_preprocessor_directives(/* in */ const char* line,
-                                      /* out */ struct directive* directive) {
+                                      /* out */ struct rgsl_directive* directive) {
     const size_t DIRECTIVE_NAME_SIZE = 64;
     const size_t DIRECTIVE_VALUE_SIZE = 256;                               
     if (directive == NULL) {
@@ -33,14 +33,14 @@ bool rgsl_read_preprocessor_directives(/* in */ const char* line,
     return true;
 }
 
-void rgsl_free_directive(struct directive* directive) {
+void rgsl_free_directive(struct rgsl_directive* directive) {
     if (directive != NULL) {
         free(directive->name);
         free(directive->value);
     }
 }
 
-bool rgsl_process_directive(const struct directive_mapping DIRECTIVE_MAPPINGS[], const struct directive directive, struct parser_state* state) {
+bool rgsl_process_directive(const struct rgsl_directive_mapping DIRECTIVE_MAPPINGS[], const struct rgsl_directive directive, struct rgsl_parser_state* state) {
     for (size_t i = 0; DIRECTIVE_MAPPINGS[i].directive != NULL; i++) {
         if (strcmp(directive.name, DIRECTIVE_MAPPINGS[i].directive) == 0) {
             char * replaced_line = NULL;
@@ -76,8 +76,8 @@ bool rgsl_process_directive(const struct directive_mapping DIRECTIVE_MAPPINGS[],
     return true;
 }
 
-char * rgsl_parse_shader(const struct directive_mapping DIRECTIVE_MAPPINGS[], struct shader_data* shader) {
-    struct parser_state state;
+char * rgsl_parse_shader(const struct rgsl_directive_mapping DIRECTIVE_MAPPINGS[], struct rgsl_shader_data* shader) {
+    struct rgsl_parser_state state;
     state.shader = shader;
     state.processed_code = _strdup(shader->code);
     state.current_line = state.processed_code;
@@ -88,7 +88,7 @@ char * rgsl_parse_shader(const struct directive_mapping DIRECTIVE_MAPPINGS[], st
             state.line_end = state.current_line + strlen(state.current_line);
         }
         // Here you can add preprocessing logic, e.g., handling #include directives
-        struct directive directive;
+        struct rgsl_directive directive;
         bool found_directive = rgsl_read_preprocessor_directives(state.current_line, &directive);
         if (found_directive) {
             rgsl_process_directive(DIRECTIVE_MAPPINGS, directive, &state);

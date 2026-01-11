@@ -2,7 +2,7 @@
 #include <RGSL/glsl/parser.h>
 #include <RGSL/termio.h>
 
-bool rgsl_glsl_compile_shader(struct shader_data * shader, char** output) {
+bool rgsl_glsl_compile_shader(struct rgsl_shader_data * shader, char** output) {
     rgsl_print_info(1, "Preprocessing GLSL shader code...\n");
     *output = rgsl_parse_shader(GLSL_DIRECTIVE_MAPPINGS, shader);
     if (*output == NULL) {

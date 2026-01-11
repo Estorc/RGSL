@@ -38,7 +38,7 @@ static int on_include_option(struct argparse *self, const struct argparse_option
 
 int main(int argc, const char** argv) {
     rgsl_initialize();
-    struct shader_data* shaders = NULL;
+    struct rgsl_shader_data* shaders = NULL;
     struct argparse_option options[] = {
         OPT_GROUP("File options"),
         OPT_STRING('o', "output", &rgsl_global_options.output_file, "output file"),
@@ -88,8 +88,8 @@ int main(int argc, const char** argv) {
     if (rgsl_global_options.action & RGSL_ACTION_COMPILE_EMBED) {
         size_t num_inputs;
         for (num_inputs = 0; rgsl_global_options.input_files[num_inputs] != NULL; num_inputs++);
-        shaders = (struct shader_data*)malloc(sizeof(struct shader_data) * (num_inputs + 1));
-        shaders[num_inputs] = (struct shader_data){0};
+        shaders = (struct rgsl_shader_data*)malloc(sizeof(struct rgsl_shader_data) * (num_inputs + 1));
+        shaders[num_inputs] = (struct rgsl_shader_data){0};
     } else if (rgsl_global_options.input_files[1] != NULL) {
         rgsl_print_info(0, "Multiple input files detected. To embed multiple shaders into a single C array, use the --embed option.\n");
         rgsl_print_error("Only one input file can be processed at a time unless using --embed\n");
@@ -97,7 +97,7 @@ int main(int argc, const char** argv) {
         return 1;
     }
 
-    glslang_initialize();
+    rgsl_glslang_initialize();
     for (int i = 0; rgsl_global_options.input_files[i] != NULL; i++) {
         const char* input_file = rgsl_global_options.input_files[i];
         rgsl_printf_info(3, "Input file: %s\n", input_file);
@@ -107,7 +107,7 @@ int main(int argc, const char** argv) {
             return 1;
         }
 
-        struct shader_data shader;
+        struct rgsl_shader_data shader;
         const char* shader_file = input_file;
         char* raw_shader_code;
         rgsl_read_file(shader_file, &raw_shader_code);
@@ -166,6 +166,6 @@ int main(int argc, const char** argv) {
         }
         free(shaders);
     }
-    glslang_finalize();
+    rgsl_glslang_finalize();
     return 0;
 }

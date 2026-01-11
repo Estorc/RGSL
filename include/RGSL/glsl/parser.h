@@ -45,4 +45,4 @@
  * 
  * This array maps GLSL preprocessor directives to their corresponding handler functions.
  */
-extern const struct directive_mapping GLSL_DIRECTIVE_MAPPINGS[];
+extern const struct rgsl_directive_mapping GLSL_DIRECTIVE_MAPPINGS[];

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-static const struct stage_mapping STAGE_MAPPINGS[] = {
+static const struct rgsl_stage_mapping STAGE_MAPPINGS[] = {
     {"vert", "RGSL_VERTEX"},
     {"frag", "RGSL_FRAGMENT"},
     {"comp", "RGSL_COMPUTE"}
@@ -58,7 +58,7 @@ const char* rgsl_get_stage_enum(const char* stage) {
     return "RGSL_UNKNOWN_STAGE";
 }
 
-bool rgsl_package_shaders(struct shader_data* shaders) {
+bool rgsl_package_shaders(struct rgsl_shader_data* shaders) {
     bool success = true;
 
     FILE *output_file;
@@ -109,7 +109,7 @@ bool rgsl_package_shaders(struct shader_data* shaders) {
     fprintf(output_file, "const struct rgsl_shader_blob rgsl_shaders[] = {\n");
 
     for (size_t i = 0; shaders[i].code != NULL; i++) {
-        struct shader_data shader = shaders[i];
+        struct rgsl_shader_data shader = shaders[i];
         const char* shader_code = shader.code;
         const size_t word_count = shader.word_count;
         

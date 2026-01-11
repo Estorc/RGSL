@@ -1,10 +1,10 @@
-# RGSL - RaeptorCogs Shading Language
+# RGSL - Raeptor Graphic Shading Language
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
     <img src="rgsl-logo.png" alt="RGSL logo" style="width: 20%" />
     <br><br>
-    <strong>RGSL (RaeptorCogs Shading Language)</strong> is a high-level
+    <strong>RGSL (Raeptor Graphic Shading Language)</strong> is a high-level
     <br>shading language designed for the RaeptorCogs graphics framework.
     <br><br>
 </p>
@@ -25,7 +25,7 @@ It also let developers use GLSL directly when needed.
 
 - [ ] Complete RGSL language specification
 - [ ] Implement RGSL to GLSL transpiler
-- [ ] Integrate RGSL into RaeptorCogs framework
+- [x] Integrate RGSL into RaeptorCogs framework
 - [ ] Develop documentation and tutorials
 - [ ] Community feedback and iteration
 - [ ] Support for additional shading languages (e.g., HLSL, Metal)
@@ -90,5 +90,5 @@ cmake --build .
 
 ## License
 
-RaeptorCogs is licensed under the MIT License.
-See the [**LICENSE**](https://github.com/Estorc/RaeptorCogs/blob/main/LICENSE.txt) file for details.
+RGSL is licensed under the MIT License.
+See the [**LICENSE**](https://github.com/Estorc/RGSL/blob/main/LICENSE.txt) file for details.

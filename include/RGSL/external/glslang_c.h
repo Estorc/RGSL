@@ -52,7 +52,7 @@ extern "C" {
  * This structure contains the compiled SPIR-V words, the number of words,
  * the compilation log, and a success flag.
  */
-struct glslang_result {
+struct rgsl_glslang_result {
     const uint32_t* words;
     size_t word_count;
     const char* log;
@@ -64,7 +64,7 @@ struct glslang_result {
  * 
  * This function should be called before any other glslang functions are used.
  */
-void glslang_initialize();
+void rgsl_glslang_initialize();
 
 /**
  * @brief Finalizes the glslang process.
@@ -72,7 +72,7 @@ void glslang_initialize();
  * This function should be called to clean up resources used by glslang after
  * all glslang functions have been used.
  */
-void glslang_finalize();
+void rgsl_glslang_finalize();
 
 /**
  * @brief Validates GLSL shader source code.
@@ -87,7 +87,7 @@ void glslang_finalize();
  * 
  * @note The caller is responsible for freeing the out_log buffer.
  */
-bool glslang_validate_glsl(const char* source, const char* stage_str, char** out_log);
+bool rgsl_glslang_validate_glsl(const char* source, const char* stage_str, char** out_log);
 
 /**
  * @brief Compiles GLSL shader source code to SPIR-V.
@@ -98,19 +98,19 @@ bool glslang_validate_glsl(const char* source, const char* stage_str, char** out
  * 
  * This function compiles the provided GLSL shader code for the specified shader stage
  * into SPIR-V binary format. The resulting SPIR-V words and compilation log are
- * included in the returned glslang_result_t structure. The caller is responsible for freeing
- * the log and words in the glslang_result_t structure using glslang_free_result.
+ * included in the returned rgsl_glslang_result structure. The caller is responsible for freeing
+ * the log and words in the rgsl_glslang_result structure using rgsl_glslang_free_result.
  */
-struct glslang_result glslang_compile_glsl(const char* source, const char* stage);
+struct rgsl_glslang_result rgsl_glslang_compile_glsl(const char* source, const char* stage);
 
 /**
- * @brief Frees the resources allocated in a glslang_result_t structure.
- * @param r Pointer to the glslang_result_t structure to free.
+ * @brief Frees the resources allocated in a rgsl_glslang_result structure.
+ * @param r Pointer to the rgsl_glslang_result structure to free.
  * 
  * This function frees the memory allocated for the log and words in the
- * provided glslang_result_t structure.
+ * provided rgsl_glslang_result structure.
  */
-void glslang_free_result(struct glslang_result* r);
+void rgsl_glslang_free_result(struct rgsl_glslang_result* r);
 
 #ifdef __cplusplus
 }
