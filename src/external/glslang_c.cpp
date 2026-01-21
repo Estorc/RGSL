@@ -106,6 +106,7 @@ static TBuiltInResource InitResources()
     Resources.maxTaskWorkGroupSizeY_NV                  = 1;
     Resources.maxTaskWorkGroupSizeZ_NV                  = 1;
     Resources.maxMeshViewCountNV                        = 4;
+    Resources.maxDualSourceDrawBuffersEXT               = 1;
 
     Resources.limits.nonInductiveForLoops                 = 1;
     Resources.limits.whileLoops                           = 1;
