@@ -76,7 +76,7 @@ bool rgsl_package_shaders(struct rgsl_shader_data* shaders) {
         "    RGSL_VERTEX,\n"
         "    RGSL_FRAGMENT,\n"
         "    RGSL_COMPUTE,\n"
-        "    RGSL_UNKNOWN_STAGE\n"
+        "    RGSL_UNKNOWN_STAGE = UINT8_MAX\n"
         "};\n"
         "\n"
         "struct rgsl_shader_blob {\n"

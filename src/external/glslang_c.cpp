@@ -179,6 +179,10 @@ struct rgsl_glslang_result rgsl_glslang_compile_glsl(const char* source, const c
     glslang::TShader shader(stage);
     shader.setStrings(&source, 1);
 
+    shader.setEnvInput(glslang::EShSourceGlsl, stage, glslang::EShClientVulkan, glslang::EShTargetVulkan_1_2);
+    shader.setEnvClient(glslang::EShClientVulkan, glslang::EShTargetVulkan_1_2);
+    shader.setEnvTarget(glslang::EShTargetSpv, glslang::EShTargetSpv_1_5);
+
     EShMessages messages = EShMsgDefault;
     TBuiltInResource resources = InitResources();
     if (!shader.parse(&resources, 100, false, messages)) {
