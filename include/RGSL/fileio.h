@@ -39,6 +39,7 @@
 
 #pragma once
 #include <stdbool.h>
+#include <stddef.h>
 
 /**
  * @brief Reads the entire contents of a file into a dynamically allocated buffer.

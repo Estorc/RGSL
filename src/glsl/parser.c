@@ -5,7 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-int rgsl_glsl_handle_include_directive(struct rgsl_parser_state* state, const char* value, void* out) {
+#ifndef _WIN32
+#define _strdup strdup
+#endif
+
+int rgsl_glsl_handle_include_directive(struct rgsl_parser_state* , const char* value, void* out) {
     // Placeholder for handling #include directive
     rgsl_printf_info(2, "Handling #include directive with value: %s\n", value);
     if (out != NULL) {

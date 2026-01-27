@@ -4,7 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct rgsl_options rgsl_global_options = {};
+#ifndef _WIN32
+#define strncpy_s(dest, destsz, src, count) strncpy((dest), (src), (count))
+#endif
+
+struct rgsl_options rgsl_global_options = {0};
 
 static const struct rgsl_language_mapping LANGUAGE_MAPPINGS[] = {
     /** 

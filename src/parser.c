@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef _WIN32
+#define _strdup strdup
+#endif
+
 bool rgsl_read_preprocessor_directives(/* in */ const char* line,
                                       /* out */ struct rgsl_directive* directive) {
     const size_t DIRECTIVE_NAME_SIZE = 64;

@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef _WIN32
+#define fopen_s(pFile,filename,mode) ((*(pFile))=fopen((filename),(mode)))==NULL
+#endif
+
 size_t rgsl_read_file(const char* filename, char **out_buffer) {
     FILE *file;
     fopen_s(&file, filename, "rb");

@@ -39,6 +39,7 @@
 
 #pragma once
 #include <stdbool.h>
+#include <stddef.h>
 
 /**
  * @brief Structure to hold shader profile information.

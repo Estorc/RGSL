@@ -9,7 +9,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int on_include_option(struct argparse *self, const struct argparse_option *option) {
+#ifndef _WIN32
+#define _strdup strdup
+#endif
+
+static int on_include_option(struct argparse *self, const struct argparse_option *) {
     static int count = 2;
     
     const char *value;
